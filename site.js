@@ -106,11 +106,7 @@ function replayButton(el, mount) {
 
   const grid = document.getElementById("capsules");
   if (grid) {
-    CAPSULES.forEach((capsule, i) => {
-      const el = createCapsule(capsule);
-      el.style.setProperty("--i", i);
-      grid.appendChild(el);
-    });
+    CAPSULES.forEach((capsule) => grid.appendChild(createCapsule(capsule)));
   }
 
   // Recherche : ignore les accents et les majuscules, tous les mots tapés doivent correspondre.
