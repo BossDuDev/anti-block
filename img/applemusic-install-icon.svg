@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 150" font-family="Segoe UI, Roboto, Arial, sans-serif">
+  <rect width="720" height="150" rx="12" fill="#dfe1e5"/>
+  <rect x="20" y="28" width="580" height="48" rx="24" fill="#fff"/>
+  <circle cx="48" cy="52" r="14" fill="#e8eaed"/>
+  <path d="M42 48h12M42 56h12" stroke="#444" stroke-width="2"/><circle cx="50" cy="48" r="2.5" fill="#444"/><circle cx="46" cy="56" r="2.5" fill="#444"/>
+  <text x="76" y="59" font-size="20" fill="#202124">music.apple.com</text>
+  <g fill="none" stroke="#444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="478" y="42" width="24" height="16" rx="2"/><path d="M484 65h12M490 58v7M490 44v8M486 49l4 4 4-4"/>
+    <path d="M545 42l3 7 7.5.7-5.7 5 1.8 7.5-6.6-4-6.6 4 1.8-7.5-5.7-5 7.5-.7z"/>
+  </g>
+  <circle cx="490" cy="53" r="27" fill="none" stroke="#e53935" stroke-width="4"/>
+  <circle cx="640" cy="52" r="14" fill="#8ab4f8"/><g fill="#444"><circle cx="684" cy="42" r="2.5"/><circle cx="684" cy="52" r="2.5"/><circle cx="684" cy="62" r="2.5"/></g>
+  <path d="M490 84v12" stroke="#e53935" stroke-width="3"/><path d="M484 90l6-8 6 8" fill="none" stroke="#e53935" stroke-width="3"/>
+  <text x="490" y="122" font-size="18" font-weight="700" fill="#e53935" text-anchor="middle">L'icône à repérer : un écran avec une flèche</text>
+</svg>
