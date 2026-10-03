@@ -26,6 +26,7 @@ function replayButton(el, mount) {
   const CAPSULES = [
     {
       name: "YouTube",
+    tag: "Sites et applis",
       description: "Comment désactiver les contrôles d'accès à YouTube pour regarder plein de vidéos",
       url: "youtube.html",
       logo: "img/youtube.svg",
@@ -33,6 +34,7 @@ function replayButton(el, mount) {
     },
     {
       name: "WhatsApp",
+    tag: "Sites et applis",
       description: "Utilise WhatsApp depuis ton ordi du lycée, et installe même l'app",
       url: "whatsapp.html",
       logo: "img/whatsapp.svg",
@@ -40,6 +42,7 @@ function replayButton(el, mount) {
     },
     {
       name: "Discord",
+    tag: "Sites et applis",
       description: "Utilise Discord depuis ton navigateur",
       url: "discord.html",
       logo: "img/discord.svg",
@@ -47,6 +50,7 @@ function replayButton(el, mount) {
     },
     {
       name: "Apple Music",
+    tag: "Sites et applis",
       description: "Connecte-toi à Apple Music dans ton navigateur, et installe même l'app",
       url: "apple-music.html",
       logo: "img/apple-music.svg",
@@ -54,6 +58,7 @@ function replayButton(el, mount) {
     },
     {
       name: "ChatGPT",
+    tag: "Sites et applis",
       description: "Crée un compte ChatGPT avec une adresse Proton Mail, pas à pas",
       url: "chatgpt.html",
       logo: "img/chatgpt.svg",
@@ -61,6 +66,7 @@ function replayButton(el, mount) {
     },
     {
       name: "Calculatrice",
+    tag: "Calculatrice",
       description: "Ajoute des scripts et des jeux à ta calculatrice (TI-83, Casio, NumWorks)",
       url: "calculatrice.html",
       logo: "img/calculatrice.svg",
@@ -68,6 +74,7 @@ function replayButton(el, mount) {
     },
     {
       name: "Mini jeux",
+    tag: "Jeux",
       description: "Plein de mini jeux pour passer le temps",
       url: "mini-jeux.html",
       logo: "img/mini-jeux.svg",
@@ -109,24 +116,36 @@ function replayButton(el, mount) {
     CAPSULES.forEach((capsule) => grid.appendChild(createCapsule(capsule)));
   }
 
-  // Recherche : ignore les accents et les majuscules, tous les mots tapés doivent correspondre.
+  // Recherche + catégories : ignore accents et majuscules, tous les mots tapés doivent correspondre.
   const search = document.getElementById("search");
   if (grid && search) {
     const norm = (t) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const items = Array.from(grid.children).map((el, i) => ({ el, text: norm(CAPSULES[i].name + " " + CAPSULES[i].description) }));
+    const items = Array.from(grid.children).map((el, i) => ({ el, tag: CAPSULES[i].tag, text: norm(`${CAPSULES[i].name} ${CAPSULES[i].description} ${CAPSULES[i].tag}`) }));
     const count = document.getElementById("count");
     const empty = document.getElementById("empty");
+    const filters = document.getElementById("filters");
+    let tag = "Tout";
     const update = () => {
       const words = norm(search.value).split(/\s+/).filter(Boolean);
       let shown = 0;
-      items.forEach(({ el, text }) => {
-        const ok = words.every((w) => text.includes(w));
-        el.hidden = !ok;
+      items.forEach((item) => {
+        const ok = (tag === "Tout" || item.tag === tag) && words.every((w) => item.text.includes(w));
+        item.el.hidden = !ok;
         if (ok) shown++;
       });
-      count.textContent = shown + (shown > 1 ? " capsules" : " capsule");
+      count.textContent = shown + (shown > 1 ? " résultats" : " résultat");
       empty.hidden = shown > 0;
     };
+    if (filters) {
+      ["Tout", ...new Set(CAPSULES.map((c) => c.tag))].forEach((name) => {
+        const chip = h("button", { class: "chip", type: "button", "aria-pressed": String(name === "Tout"), onclick: () => {
+          tag = name;
+          filters.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+          update();
+        } }, name);
+        filters.appendChild(chip);
+      });
+    }
     search.addEventListener("input", update);
     update();
   }
@@ -399,4 +418,3 @@ function replayButton(el, mount) {
 
   open(GAMES[0]);
 })();
-
