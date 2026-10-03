@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anti Block</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+  <header class="top">
+    <a class="mark" href="index.html">Anti Block</a>
+    <a class="ask" href="https://discord.com/users/1330656704504791155" target="_blank" rel="noopener noreferrer" title="Envoie-moi un message privé sur Discord">
+      <b>Demander un ajout ↗</b>
+      <small>par message privé sur Discord</small>
+    </a>
+  </header>
+
+  <div class="sheet">
+    <h1>Site "crackable" actuellement</h1>
+    <p class="intro">Choisis ce à quoi tu veux avoir accès.</p>
+
+    <div class="find">
+      <label for="search">Que cherches-tu ?</label>
+      <input id="search" type="search" placeholder="YouTube, WhatsApp, calculatrice, jeux…" autocomplete="off">
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Catégories"></div>
+    <p class="meta"><span>Clique sur une ligne pour ouvrir son tuto.</span><span id="count" aria-live="polite"></span></p>
+
+    <div class="grid" id="capsules"></div>
+    <p class="empty" id="empty" hidden>Rien ne correspond. <a href="https://discord.com/users/1330656704504791155" target="_blank" rel="noopener noreferrer">Demande-le moi</a> en message privé sur Discord.</p>
+    <noscript>Active JavaScript pour afficher les capsules.</noscript>
+    <p class="footnote">Les logos n'étant pas libres de droits, on les a faits maison.</p>
+  </div>
+
+  <script src="site.js" defer></script>
+</body>
+</html>
