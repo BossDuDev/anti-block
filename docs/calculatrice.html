@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ajouter des scripts à ta calculatrice</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-calc">
+  <main>
+    <a class="back" href="index.html">← Retour à l'accueil</a>
+    <h1>Ajouter des scripts à ta calculatrice</h1>
+    <p class="intro">Quel modèle de calculatrice as-tu ? Clique sur le tien pour voir le tuto.</p>
+
+    <div class="tabs" role="tablist" aria-label="Choisis ton modèle de calculatrice">
+      <button class="tab" role="tab" id="tab-ti-83" aria-controls="panel-ti-83" aria-selected="true" type="button">TI-83 Premium CE</button>
+      <button class="tab" role="tab" id="tab-casio" aria-controls="panel-casio" aria-selected="false" type="button">Casio Graph 35+E II</button>
+      <button class="tab" role="tab" id="tab-numworks" aria-controls="panel-numworks" aria-selected="false" type="button">NumWorks</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-ti-83" aria-labelledby="tab-ti-83">
+      <h2 class="panel__title">TI-83 Premium CE</h2>
+      <p class="step__text"><strong>Comment la reconnaître :</strong> Marque Texas Instruments, écran couleur. « TI-83 Premium CE » est écrit sous l'écran.</p>
+      <p class="step__text">Pour la TI-83 Premium CE (écran couleur). Tu vas installer un lanceur de jeux (Cesium), puis ajouter des jeux. Ce tuto ne concerne pas l'ancienne TI-83 Plus en noir et blanc, qui demande une autre méthode.</p>
+      <ol class="steps">
+      <li class="step">
+        <h2 class="step__title">Installe TI Connect CE sur ton ordinateur</h2>
+        <p class="step__text">C'est le logiciel gratuit de Texas Instruments qui sert à envoyer des fichiers vers la calculatrice. Cherche « TI Connect CE » sur le site education.ti.com et installe-le.</p><p class="step__text">Il existe pour Windows et Mac. Il ne marche pas sur un Chromebook : utilise un PC ou un Mac pour cette étape.</p><a class="button" href="https://education.ti.com" target="_blank" rel="noopener noreferrer">Ouvrir le site de Texas Instruments</a>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Branche ta calculatrice</h2>
+        <p class="step__text">Allume la calculatrice, branche-la à l'ordinateur avec le câble USB, puis ouvre TI Connect CE. Ta calculatrice doit apparaître dans la fenêtre du logiciel.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Regarde la version du système de ta calculatrice</h2>
+        <p class="step__text">Sur la calculatrice, appuie sur <strong>[2nde]</strong> puis sur <strong>[+]</strong> (touche MÉM), puis choisis <strong>« 1 : À propos »</strong>. Note le numéro de version.</p><p class="step__text">Les jeux écrits en TI-Basic marchent sur toutes les versions. Les jeux « natifs » (plus beaux et plus rapides, lancés avec Cesium) peuvent être bloqués par les versions récentes du système. Si c'est ton cas, la communauté explique comment faire sur ticalc.org, TI-Planet et Cemetech (cherche « arTIfiCE »). C'est à tes risques, et ce n'est pas adapté aux examens.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Télécharge le lanceur de jeux (Cesium) et ses bibliothèques</h2>
+        <p class="step__text">Il te faut deux fichiers gratuits : <strong>Cesium</strong> (le lanceur, fichier « Cesium.8xp ») et les <strong>bibliothèques C</strong> (fichier « clibs.8xg »), que beaucoup de jeux utilisent.</p><a class="button" href="https://github.com/mateoconlechuga/cesium/releases" target="_blank" rel="noopener noreferrer">Télécharger Cesium</a> <a class="button" href="https://github.com/CE-Programming/libraries/releases" target="_blank" rel="noopener noreferrer">Télécharger les bibliothèques</a>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Envoie-les sur la calculatrice</h2>
+        <p class="step__text">Dans TI Connect CE, glisse les deux fichiers dans la fenêtre de ta calculatrice (ou utilise le bouton « Envoyer vers la calculatrice »). Attends que le transfert soit fini.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Ajoute des jeux</h2>
+        <p class="step__text">Télécharge des jeux sur <a href="https://tiplanet.org" target="_blank" rel="noopener noreferrer">TI-Planet</a> ou <a href="https://www.ticalc.org" target="_blank" rel="noopener noreferrer">ticalc.org</a>. Ce sont des fichiers qui finissent par « .8xp » (parfois aussi « .8xv »). Envoie-les sur la calculatrice de la même façon qu'à l'étape précédente.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Lance un jeu</h2>
+        <p class="step__text"><strong>Avec Cesium :</strong> appuie sur <strong>[prgm]</strong>, choisis <strong>CESIUM</strong>, puis appuie sur <strong>[entrée]</strong> (deux fois si besoin). La liste de tes jeux s'affiche : choisis-en un avec les flèches et appuie sur [entrée].</p><p class="step__text"><strong>Jeu en TI-Basic :</strong> appuie sur [prgm], choisis le nom du jeu, puis appuie deux fois sur [entrée].</p>
+      </li>
+    </ol>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-casio" aria-labelledby="tab-casio">
+      <h2 class="panel__title">Casio Graph 35+E II</h2>
+      <p class="step__text"><strong>Comment la reconnaître :</strong> Marque Casio, écran noir et blanc. « Graph 35+E II » est écrit sur la calculatrice.</p>
+      <p class="step__text">Pour la Casio Graph 35+E II. Tu vas copier des fichiers sur la calculatrice comme sur une clé USB. Aucun lanceur supplémentaire n'est nécessaire. Les noms des menus peuvent varier un peu selon la version du système.</p>
+      <ol class="steps">
+      <li class="step">
+        <h2 class="step__title">Branche la calculatrice à l'ordinateur</h2>
+        <p class="step__text">Allume la calculatrice et branche-la avec le câble USB. Ça marche sur Windows, Mac et Chromebook.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Choisis le mode « USB Flash »</h2>
+        <p class="step__text">La calculatrice affiche un écran pour choisir le mode de connexion. Appuie sur la touche <strong>[F1]</strong> correspondant à <strong>« USB Flash »</strong>. Si rien ne s'affiche, débranche puis rebranche le câble.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Ouvre le disque de la calculatrice</h2>
+        <p class="step__text">Un nouveau disque apparaît sur l'ordinateur, comme une clé USB. Ouvre-le (sur Chromebook, il apparaît dans l'application « Fichiers » à gauche).</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Trouve des scripts et des jeux</h2>
+        <p class="step__text">Télécharge-les sur <a href="https://www.planet-casio.fr" target="_blank" rel="noopener noreferrer">Planète Casio</a>, le grand site français de la communauté Casio. Choisis des fichiers « .py » (scripts Python) ou « .g1m » (programmes).</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Copie les fichiers sur la calculatrice</h2>
+        <p class="step__text">Glisse les fichiers téléchargés dans le disque de la calculatrice, à la racine (pas dans un dossier).</p><p class="step__text">Quand c'est fini, éjecte le disque proprement (clic droit sur le disque puis « Éjecter »), puis débranche le câble.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Lance ton script ou ton jeu</h2>
+        <p class="step__text">Sur la calculatrice, va dans le menu principal. Pour un fichier « .py », ouvre l'application <strong>Python</strong>, choisis ton fichier, puis lance-le avec la touche indiquée en bas de l'écran (souvent <strong>[F1]</strong>, « Exécuter »).</p><p class="step__text">Pour un fichier « .g1m », ouvre le menu des programmes de la calculatrice, choisis le fichier et lance-le.</p>
+      </li>
+    </ol>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-numworks" aria-labelledby="tab-numworks">
+      <h2 class="panel__title">NumWorks</h2>
+      <p class="step__text"><strong>Comment la reconnaître :</strong> Marque NumWorks, écran couleur. « NumWorks » est écrit sur la face avant.</p>
+      <p class="step__text">Pour la NumWorks. Elle fonctionne avec des scripts Python : tu en écris ou tu en trouves, puis tu les envoies sur la calculatrice. Aucun lanceur supplémentaire n'est nécessaire. Les noms des boutons peuvent varier un peu.</p>
+      <ol class="steps">
+      <li class="step">
+        <h2 class="step__title">Ouvre le site NumWorks dans Chrome ou Edge</h2>
+        <p class="step__text">Le transfert par USB ne marche que dans Google Chrome ou Microsoft Edge (pas dans Firefox ni Safari). Crée un compte gratuit ou connecte-toi.</p><a class="button" href="https://my.numworks.com" target="_blank" rel="noopener noreferrer">Ouvrir my.numworks.com</a>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Crée un script</h2>
+        <p class="step__text">Dans la section des scripts Python du site, crée un nouveau script. Écris ton programme ou colle un exemple. Voici un petit jeu pour essayer, « Devine le nombre » :</p><pre class="code"><code>from random import randint
+
+secret = randint(1, 100)
+essais = 0
+trouve = False
+while not trouve:
+    n = int(input(&quot;Ton nombre (1-100) : &quot;))
+    essais += 1
+    if n &lt; secret:
+        print(&quot;Trop petit&quot;)
+    elif n &gt; secret:
+        print(&quot;Trop grand&quot;)
+    else:
+        print(&quot;Bravo en&quot;, essais, &quot;essais !&quot;)
+        trouve = True</code></pre>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Branche la calculatrice</h2>
+        <p class="step__text">Allume ta NumWorks et branche-la à l'ordinateur avec le câble USB.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Envoie le script sur la calculatrice</h2>
+        <p class="step__text">Sur le site, clique sur le bouton <strong>« Envoyer vers la calculatrice »</strong>. Chrome ou Edge te demande l'autorisation : choisis ta NumWorks dans la liste, puis clique sur <strong>« Connecter »</strong>. Attends le message de confirmation.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Lance le script</h2>
+        <p class="step__text">Sur la calculatrice, ouvre l'application <strong>Python</strong>. Ton script est dans la liste : sélectionne-le avec les flèches, appuie sur <strong>[OK]</strong>, puis choisis <strong>« Exécuter le script »</strong>.</p>
+      </li>
+      <li class="step">
+        <h2 class="step__title">Trouve d'autres jeux</h2>
+        <p class="step__text">Tu peux chercher des jeux et des scripts Python pour la NumWorks sur <a href="https://tiplanet.org" target="_blank" rel="noopener noreferrer">TI-Planet</a> (il a une section NumWorks). Copie le code dans un nouveau script sur my.numworks.com, puis envoie-le comme à l'étape 4.</p>
+      </li>
+    </ol>
+    </div>
+
+    <p class="note">Tu ne sais pas laquelle tu as ? Regarde le nom écrit sur la calculatrice, sous l'écran ou au dos.</p>
+    <p class="note">Ces programmes sont faits pour t'amuser en dehors des évaluations. Pendant un contrôle ou un examen, suis les consignes de ton professeur et les règles du mode examen de ta calculatrice.</p>
+  </main>
+  <script src="site.js" defer></script>
+</body>
+</html>
