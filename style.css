@@ -1,0 +1,407 @@
+/* ===== variables ===== */
+/* Couleurs (thème clair / sombre) */
+:root {
+  --bg: #f3f4f7;
+  --card: #ffffff;
+  --text: #17181c;
+  --muted: #5d6270;
+  --line: #dfe2e9;
+  --accent: #ff0000;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14151a;
+    --card: #1e2027;
+    --text: #f1f2f5;
+    --muted: #a2a7b5;
+    --line: #2e313b;
+  }
+}
+
+/* ===== base ===== */
+/* Base commune à toutes les pages */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  margin: 0 0 40px;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+/* Petit texte discret en bas de page */
+.footnote {
+  margin: 40px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ===== capsules ===== */
+/* Grille et cartes (capsules) de la page d'accueil */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.capsule {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.capsule:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.capsule:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.capsule__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.capsule__logo {
+  display: block;
+  width: 48px;
+  height: auto;
+  flex: none;
+}
+
+.capsule__name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.capsule__description {
+  margin: 0;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capsule {
+    transition: none;
+  }
+  .capsule:hover {
+    transform: none;
+  }
+}
+
+/* ===== tutorial ===== */
+/* Page de tutoriel (public/pages/youtube) */
+.back {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding: 24px 24px 24px 84px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  counter-increment: step;
+}
+
+.step::before {
+  content: counter(step);
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.step__title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+}
+
+.step__text {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.step__text:last-child {
+  margin-bottom: 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+kbd {
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/* Onglets par navigateur */
+.tabs {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.js .tabs {
+  display: flex;
+}
+
+.tab {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tab[aria-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.tab:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.panel__title {
+  margin: 16px 0 8px;
+  font-size: 1.1rem;
+}
+
+.js .panel__title {
+  display: none;
+}
+
+.panel ol {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 1.05rem;
+}
+
+.panel li {
+  margin-bottom: 8px;
+}
+
+.panel li:last-child {
+  margin-bottom: 0;
+}
+
+.note {
+  margin: 24px 0 0;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .step {
+    padding: 76px 20px 20px;
+  }
+}
+
+/* Couleur d'accent propre à chaque tuto */
+.theme-whatsapp {
+  --accent: #128c7e;
+}
+
+.theme-discord {
+  --accent: #5865f2;
+}
+
+.theme-applemusic {
+  --accent: #fa243c;
+}
+
+/* Section bonus + illustrations */
+.bonus {
+  margin-top: 56px;
+}
+
+.bonus__title {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.illustration {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 12px 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Page ChatGPT / Proton Mail */
+.theme-chatgpt {
+  --accent: #0f7b63;
+}
+
+.theme-chatgpt .illustration {
+  max-width: 640px;
+}
+
+.steps--from-5 {
+  counter-reset: step 4;
+}
+
+/* Pages calculatrice */
+.theme-calc {
+  --accent: #2563eb;
+}
+
+.code {
+  margin: 10px 0 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.step__text a:not(.button) {
+  color: var(--accent);
+}
+
+/* ===== games ===== */
+/* Page mini jeux */
+.game-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.game-tab { padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--text); font: inherit; cursor: pointer; }
+.game-tab[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; font-weight: 600; }
+.game-tab:focus-visible, .btn:focus-visible, .ttt__cell:focus-visible, .memory__card:focus-visible, .pfc__btn:focus-visible, .react:focus-visible, .input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.stage { padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; text-align: center; }
+.game__status { min-height: 1.5em; margin: 0 0 16px; font-size: 1.15rem; }
+.game__score { margin: 16px 0 0; color: var(--muted); }
+.row { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
+
+.btn { margin-top: 16px; padding: 10px 20px; border: none; border-radius: 12px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.row .btn { margin-top: 0; }
+.input { width: 120px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); font: inherit; }
+
+.ttt { display: grid; grid-template-columns: repeat(3, 88px); gap: 8px; justify-content: center; }
+.ttt__cell { height: 88px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); font-size: 2.2rem; font-weight: 700; cursor: pointer; }
+
+.memory { display: grid; grid-template-columns: repeat(4, 72px); gap: 8px; justify-content: center; }
+.memory__card { height: 72px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); font-size: 1.9rem; cursor: pointer; }
+.memory__card:disabled { background: var(--card); opacity: 0.6; cursor: default; }
+
+.pfc { display: flex; justify-content: center; gap: 12px; }
+.pfc__btn { width: 88px; height: 88px; border: 1px solid var(--line); border-radius: 50%; background: var(--bg); font-size: 2.4rem; cursor: pointer; }
+
+.react { width: 100%; max-width: 420px; height: 180px; border: none; border-radius: 16px; color: #fff; font: inherit; font-size: 1.3rem; font-weight: 700; cursor: pointer; }
+.react--idle { background: #475569; }
+.react--wait { background: #b91c1c; }
+.react--go { background: #15803d; }
+
+@media (max-width: 420px) {
+  .ttt { grid-template-columns: repeat(3, 72px); }
+  .ttt__cell { height: 72px; }
+  .memory { grid-template-columns: repeat(4, 64px); }
+  .memory__card { height: 64px; }
+}
+
+.theme-games { --accent: #c2410c; }
+
+/* ===== Onglets de la calculatrice : les étapes gardent leur style normal dans un panneau ===== */
+.panel .steps { margin-top: 16px; padding-left: 0; font-size: inherit; }
+.panel .step { margin-bottom: 0; }
