@@ -39,6 +39,8 @@ body {
 }
 ::selection { background: #e3b7a3; }
 /* Grain de papier : si léger qu'on le devine seulement sur les grands aplats */
+/* Papier légèrement froissé : de grands plis très doux, juste de l'ombre et de la lumière, sans aucune ligne */
+html::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.42; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.011 .014' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeDiffuseLighting surfaceScale='6' diffuseConstant='1' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='235' elevation='62'/%3E%3C/feDiffuseLighting%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1' intercept='.12'/%3E%3CfeFuncG type='linear' slope='1' intercept='.12'/%3E%3CfeFuncB type='linear' slope='1' intercept='.12'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23c%29'/%3E%3C/svg%3E"); background-size: 900px 900px; }
 body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.12; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.07; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .55' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"); }  /* fibres du papier */
 :focus-visible { outline: 2px solid var(--brick); outline-offset: 2px; }
@@ -71,7 +73,8 @@ h2, h3 { font-weight: 500; }
 .lead__text { flex: 1 1 300px; }
 .counters { display: flex; gap: 32px; margin: 0; visibility: hidden; }
 .js .counters { visibility: visible; }
-.counter { display: flex; flex-direction: column-reverse; }
+.counter { display: flex; flex-direction: column; }
+.counter dd { order: -1; }
 .counter dd { margin: 0; color: var(--brick); font-size: 2.6rem; font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
 .counter dt { max-width: 13ch; margin-top: 6px; color: var(--muted); font-family: var(--mono); font-size: var(--fs-label); letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.35; }
 
