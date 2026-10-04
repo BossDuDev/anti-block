@@ -164,7 +164,11 @@ function replayButton(el, mount) {
 
   const grid = document.getElementById("capsules");
   if (grid) {
-    CAPSULES.forEach((capsule) => grid.appendChild(createCapsule(capsule)));
+    CAPSULES.forEach((capsule, i) => {
+      const el = createCapsule(capsule);
+      el.style.setProperty("--i", i);
+      grid.appendChild(el);
+    });
   }
 
   // Recherche + catégories : ignore accents et majuscules, tous les mots tapés doivent correspondre.
@@ -506,4 +510,125 @@ function replayButton(el, mount) {
     document.title = wantedGame.name + " · Anti Block";
   }
   open(wantedGame || GAMES[0]);
+})();
+
+// ===== Transitions, apparitions et sons (bruits de papier créés à la volée, aucun fichier audio) =====
+(function () {
+  const VOLUME = 0.6; // 0 = muet, 1 = fort. Les sons sont déjà très discrets.
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let on = true;
+  try { on = localStorage.getItem("sound") !== "off"; } catch (e) {}
+
+  let ctx, master, noise;
+  function audio() {
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    master = ctx.createGain();
+    master.gain.value = VOLUME;
+    master.connect(ctx.destination);
+    noise = ctx.createBuffer(1, ctx.sampleRate * 1.5, ctx.sampleRate);
+    const data = noise.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+    return ctx;
+  }
+
+  // Un souffle de bruit filtré, avec une enveloppe douce : c'est la matière du papier.
+  function rustle({ type = "bandpass", from, to, q = 0.7, peak, attack, length, delay = 0 }) {
+    const t = ctx.currentTime + delay;
+    const src = ctx.createBufferSource();
+    src.buffer = noise;
+    const filter = ctx.createBiquadFilter();
+    filter.type = type;
+    filter.Q.value = q;
+    filter.frequency.setValueAtTime(from, t);
+    filter.frequency.exponentialRampToValueAtTime(to, t + length);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(peak, t + attack);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + length);
+    src.connect(filter).connect(gain).connect(master);
+    src.start(t, Math.random() * 0.8);
+    src.stop(t + length + 0.05);
+  }
+
+  // Un petit « toc » de papier posé sur une table.
+  function knock(freq, peak, length) {
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, t);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.55, t + length);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(peak, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + length);
+    osc.connect(gain).connect(master);
+    osc.start(t);
+    osc.stop(t + length + 0.02);
+  }
+
+  const sounds = {
+    // Une page qu'on tourne : un frottement qui glisse vers le grave, puis un léger bruit sourd.
+    page() {
+      rustle({ from: 2800, to: 650, q: 0.6, peak: 0.05, attack: 0.05, length: 0.34 });
+      rustle({ type: "lowpass", from: 600, to: 220, q: 0.4, peak: 0.03, attack: 0.012, length: 0.14, delay: 0.17 });
+    },
+    // Un doigt qui tapote le papier.
+    tap() {
+      rustle({ from: 2300, to: 1500, q: 1.1, peak: 0.035, attack: 0.004, length: 0.06 });
+      knock(170, 0.02, 0.09);
+    },
+  };
+  function play(name) {
+    if (!on || !audio()) return;
+    if (ctx.state === "suspended") ctx.resume();
+    sounds[name]();
+  }
+
+  // Bouton « Son » sur toutes les pages
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "sound-toggle";
+  const paint = () => {
+    toggle.setAttribute("aria-pressed", String(on));
+    toggle.textContent = on ? "Son : activé" : "Son : coupé";
+  };
+  toggle.addEventListener("click", () => {
+    on = !on;
+    try { localStorage.setItem("sound", on ? "on" : "off"); } catch (e) {}
+    paint();
+    play("tap");
+  });
+  paint();
+  document.body.appendChild(toggle);
+
+  // Clics : la page courante glisse vers le haut et la suivante monte du bas ; sons discrets.
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".sound-toggle")) return;
+    const link = e.target.closest("a[href]");
+    if (link) {
+      const internal = link.origin === location.origin && link.target !== "_blank";
+      if (!internal) return play("tap");
+      play("page");
+      const plain = e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
+      if (plain && !reduce && !e.defaultPrevented) {
+        e.preventDefault();
+        document.documentElement.classList.add("leaving");
+        setTimeout(() => { location.href = link.href; }, 200);
+      }
+      return;
+    }
+    if (e.target.closest("button, [role=tab]")) play("tap");
+  });
+  // Retour arrière : la page revient depuis le cache, on enlève l'état « en train de partir ».
+  addEventListener("pageshow", (e) => { if (e.persisted) document.documentElement.classList.remove("leaving"); });
+
+  // Apparition des étapes, notes et onglets quand on arrive dessus
+  if (!reduce && "IntersectionObserver" in window) {
+    const seen = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add("in"); seen.unobserve(entry.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll(".step, .bonus__title, .note, .tabs").forEach((el) => { el.classList.add("reveal"); seen.observe(el); });
+  }
 })();
