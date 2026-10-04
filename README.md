@@ -2,7 +2,7 @@
 
 > Un petit catalogue de tutos et de mini-jeux, pensé pour l'ordinateur du lycée.
 
-Anti Block rassemble au même endroit des guides pas à pas (YouTube, WhatsApp, Discord, Apple Music, ChatGPT, calculatrices) et quelques jeux pour passer le temps. Tout est présenté comme un **catalogue** : on cherche, on filtre, on clique sur une ligne, et on suit le guide.
+Anti Block rassemble au même endroit des guides pas à pas (YouTube, WhatsApp, Discord, Apple Music, Deezer, ChatGPT, calculatrices) et quelques jeux pour passer le temps. Tout est présenté comme un **catalogue** : on cherche, on filtre, on clique sur une ligne, et on suit le guide.
 
 ## L'idée
 
@@ -17,7 +17,7 @@ Sur un ordinateur de lycée, beaucoup de choses sont bloquées ou cachées, et l
 
 | Catégorie | Capsules |
 |---|---|
-| Sites et applis | YouTube, WhatsApp, Discord, Apple Music, ChatGPT |
+| Sites et applis | YouTube, WhatsApp, Discord, Apple Music, Deezer, ChatGPT |
 | Calculatrice | TI-83 Premium CE, Casio Graph 35+E II, NumWorks |
 | Jeux | Morpion, Memory, Pierre-feuille-ciseaux, Devine le nombre, Réflexes, Clics en 10 s |
 
@@ -73,7 +73,7 @@ HTML, CSS et JavaScript simples, sans dépendance.
 
 ```
 index.html          accueil : recherche, catégories, liste des capsules
-youtube.html  whatsapp.html  discord.html  apple-music.html  chatgpt.html
+youtube.html  whatsapp.html  discord.html  apple-music.html  deezer.html  chatgpt.html
 calculatrice.html   les 3 calculatrices (?modele=ti-83 | casio | numworks)
 mini-jeux.html      les 6 jeux (?jeu=morpion | memory | pfc | nombre | reflexes | clics)
 style.css           tout le style, avec les couleurs et tailles en variables
