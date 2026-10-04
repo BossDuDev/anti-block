@@ -1,73 +1,101 @@
 # Anti Block
 
-Site statique (HTML, CSS, JavaScript, sans framework) qui regroupe des tutos et des petits jeux, présentés comme un catalogue : on cherche, on filtre par catégorie, on clique sur une ligne.
-Il est pensé pour **GitHub Pages**. Un petit serveur Node (`index.js`) existe aussi, mais il est facultatif.
+> Un petit catalogue de tutos et de mini-jeux, pensé pour l'ordinateur du lycée.
 
-## Mettre le site en ligne (GitHub Pages)
+Anti Block rassemble au même endroit des guides pas à pas (YouTube, WhatsApp, Discord, Apple Music, ChatGPT, calculatrices) et quelques jeux pour passer le temps. Tout est présenté comme un **catalogue** : on cherche, on filtre, on clique sur une ligne, et on suit le guide.
 
-1. Mets **le contenu** de ce dossier à la racine du dépôt : `index.html` doit être visible dès la page d'accueil du dépôt, pas dans un sous-dossier.
-2. Sur GitHub : **Settings → Pages → Build and deployment → Deploy from a branch**.
-3. Choisis la branche `main` et le dossier **`/ (root)`**, puis **Save**.
-4. Attends environ une minute : le site est sur `https://<pseudo>.github.io/<nom-du-repo>/`.
+## L'idée
 
-Tous les liens sont relatifs, donc le site marche aussi dans un sous-dossier. Le fichier `.nojekyll` dit à GitHub de servir les fichiers tels quels.
+Sur un ordinateur de lycée, beaucoup de choses sont bloquées ou cachées, et les tutos qu'on trouve en ligne sont longs, pleins de pub ou en anglais. Anti Block part du contraire :
 
-## Les fichiers
+- **Court** : une page par sujet, des étapes numérotées, une image quand ça aide.
+- **Clair** : des cadres rouges sur les captures montrent où cliquer.
+- **Léger** : pas de framework, pas de compte, pas de pub, rien à installer.
+- **Fait à la main** : les logos, les illustrations et les textes sont faits pour le site.
+
+## Ce qu'il y a dedans
+
+| Catégorie | Capsules |
+|---|---|
+| Sites et applis | YouTube, WhatsApp, Discord, Apple Music, ChatGPT |
+| Calculatrice | TI-83 Premium CE, Casio Graph 35+E II, NumWorks |
+| Jeux | Morpion, Memory, Pierre-feuille-ciseaux, Devine le nombre, Réflexes, Clics en 10 s |
+
+Chaque capsule a sa propre page, avec son logo.
+
+## Fonctions
+
+- **Recherche** instantanée, sans tenir compte des accents ni des majuscules. La touche `/` met le curseur dans le champ, `Échap` l'efface.
+- **Catégories** pour filtrer la liste (elles se créent toutes seules à partir des `tag`).
+- **Demander un ajout** : un bouton mène au profil Discord de l'équipe, pour envoyer un message privé.
+- **Animations** : chaque page monte du bas, les étapes apparaissent quand on défile.
+- **Sons** : de très légers bruits de papier créés par le navigateur (aucun fichier audio), avec un bouton pour les couper.
+
+## Direction artistique
+
+**Concept : un registre imprimé.** Le site se lit comme un index de bibliothèque : des lignes numérotées, des filets fins, des étiquettes en petites capitales. La précision typographique fait le côté premium, pas les effets.
+
+### Palette
+
+Peu de couleurs, légèrement « cassées », et surtout pas de violet, de bleu, de dégradé ni de halo.
+
+| Rôle | Couleur | Code |
+|---|---|---|
+| Papier (fond) | crème | `#ebe5d6` |
+| Papier en creux (code, cases de jeu) | crème foncé | `#e2dac6` |
+| Papier en relief (zone de jeu) | crème clair | `#f2ede0` |
+| Encre (texte) | brun très foncé | `#1f1b16` |
+| Texte secondaire | brun gris | `#51493d` |
+| **Accent** | **brique** | `#ae4326` |
+| Accent au survol | brique foncée | `#8f361c` |
+
+La brique est la seule couleur vive : numéros d'étapes, liens, boutons, notes importantes.
+
+### Typographie
+
+- **Newsreader** (serif éditoriale) pour les titres et la lecture, avec de l'italique pour les nuances.
+- **IBM Plex Mono** pour les numéros, les étiquettes et les petits repères.
+
+### Formes, matière et mouvement
+
+- Coins presque carrés, traits fins, un filet double sous l'en-tête comme une page imprimée.
+- Un grain de papier à peine visible sur le fond.
+- Des mouvements courts et doux, coupés si l'appareil demande moins d'animations.
+
+### Accessibilité
+
+HTML sémantique, focus visible partout, contrastes soignés, boutons assez grands sur téléphone, animations désactivées sur demande.
+
+## Les coulisses
+
+HTML, CSS et JavaScript simples, sans dépendance.
 
 ```
-index.html           accueil : recherche, catégories, liste des capsules
+index.html          accueil : recherche, catégories, liste des capsules
 youtube.html  whatsapp.html  discord.html  apple-music.html  chatgpt.html
-                     un tuto par page
-calculatrice.html    les tutos des 3 calculatrices (page unique, voir plus bas)
-mini-jeux.html       la page qui affiche un mini jeu (page unique, voir plus bas)
-style.css            tout le style du site
-site.js              tout le JavaScript : capsules, recherche, onglets, jeux
-img/                 logo du site, logos des capsules, images des tutos
-.nojekyll            publication brute sur GitHub Pages
-index.js, package.json, .env, .gitignore    serveur Node facultatif, inutile sur GitHub
+calculatrice.html   les 3 calculatrices (?modele=ti-83 | casio | numworks)
+mini-jeux.html      les 6 jeux (?jeu=morpion | memory | pfc | nombre | reflexes | clics)
+style.css           tout le style, avec les couleurs et tailles en variables
+site.js             capsules, recherche, onglets, jeux, animations, sons
+img/                logos et captures des tutos
 ```
 
-GitHub Pages fait la différence entre majuscules et minuscules : tous les noms de fichiers sont en minuscules.
+Le site est publié avec **GitHub Pages** depuis la racine du dépôt. Un serveur Node (`index.js`) existe aussi, mais il est facultatif.
 
-## Comment ça marche
+### Ajouter une capsule
 
-- **Les capsules** sont la liste `CAPSULES` en haut de `site.js` (nom, catégorie `tag`, description, `url`, `logo`). L'accueil les affiche en liste numérotée.
-- **La recherche** ignore les accents et les majuscules, et tous les mots tapés doivent correspondre. Les boutons de catégorie viennent des `tag` : si tu inventes un nouveau `tag`, son bouton apparaît tout seul.
-- **Une capsule par calculatrice** : les liens ressemblent à `calculatrice.html?modele=casio`. La même page affiche alors seulement le tuto de ce modèle, sans onglets. Sans `?modele=`, elle affiche les trois avec des onglets.
-- **Une capsule par jeu** : les liens ressemblent à `mini-jeux.html?jeu=morpion`. La même page affiche alors seulement ce jeu. Sans `?jeu=`, elle ouvre le premier jeu avec des onglets.
+1. Ajouter le logo dans `img/`.
+2. Ajouter un bloc dans la liste `CAPSULES` en haut de `site.js` (nom, `tag`, description, `url`, `logo`).
+3. Créer la page `<nom>.html` en copiant une page existante. Pour une calculatrice ou un jeu, ajouter plutôt l'onglet ou le jeu dans `calculatrice.html` ou `mini-jeux.html`, avec une `url` du type `...?modele=` ou `...?jeu=`.
 
-## Ajouter une capsule
+## L'équipe
 
-**Un tuto**
-1. Mets le logo dans `img/`.
-2. Copie une page existante (par exemple `apple-music.html`) en `<nom>.html` et change le texte et les images.
-3. Ajoute un bloc dans `CAPSULES` : `url: "<nom>.html"`, `tag: "Sites et applis"`.
+- **BossDuDev** : fondateur et créateur du projet ([GitHub](https://github.com/BossDuDev)).
 
-**Une calculatrice**
-1. Dans `calculatrice.html`, ajoute un bouton d'onglet (`id="tab-<id>"`) et un panneau (`id="panel-<id>"`) en copiant ceux d'un modèle existant.
-2. Ajoute un bloc dans `CAPSULES` avec `url: "calculatrice.html?modele=<id>"` et `tag: "Calculatrice"`.
+Une idée de capsule ou un tuto manquant ? Envoie un message privé sur [Discord](https://discord.com/users/1330656704504791155), ou utilise le bouton « Demander un ajout » du site.
 
-**Un jeu**
-1. Dans `site.js`, écris sa fonction `mount(el)` en t'inspirant d'un jeu existant, puis ajoute-le à la liste `GAMES` (`id`, `name`, `about`, `mount`).
-2. Ajoute un bloc dans `CAPSULES` avec `url: "mini-jeux.html?jeu=<id>"` et `tag: "Jeux"`.
+## À savoir
 
-## Design
-
-- **Palette** : papier crème, encre brun très foncé, une seule couleur d'accent (la brique, `#ae4326`). Pas de violet ni de bleu, pas de dégradé, pas de halo, pas de motif de fond.
-- **Typographie** : Newsreader (texte et titres) et IBM Plex Mono (numéros et petites étiquettes), chargées depuis Google Fonts par `style.css`. Hors connexion, le site retombe sur Georgia.
-- **Détails** : coins presque carrés, filets fins, animations limitées à de courtes transitions au survol.
-- **Animations et sons** : la page monte du bas à l'arrivée, les étapes apparaissent au défilement, et de très légers bruits de papier (créés par le navigateur, aucun fichier audio) accompagnent les clics. Un bouton « Son » en bas à droite les coupe, et le volume se règle avec `VOLUME` dans `site.js`.
-- **Accessibilité** : focus visible partout, texte assez contrasté, animations coupées si l'appareil le demande.
-
-## Tester chez soi
-
-```
-python3 -m http.server
-```
-puis ouvre `http://localhost:8000`. Avec Node : `npm install` puis `npm start` (port `25589`, voir `.env`).
-
-## Si une page affiche « 404 » sur GitHub Pages
-
-1. Ouvre directement `https://<pseudo>.github.io/<nom-du-repo>/<page>.html` : si c'est un 404, le fichier n'est pas à la racine du dépôt ou son nom est différent.
-2. Vérifie que le nom est en minuscules et exactement le même que dans le lien (`mini-jeux.html`, pas `Mini-jeux.html`).
-3. Attends une minute après chaque envoi, puis recharge sans cache (`Ctrl + Maj + R`).
+- Respecte le règlement de ton établissement : ces guides expliquent comment utiliser des services, à toi de voir ce qui est permis chez toi.
+- Les logos de marques ne sont pas libres de droits : ceux du site sont des dessins faits maison, inspirés des originaux.
+- Les polices viennent de Google Fonts (licence libre SIL OFL).
