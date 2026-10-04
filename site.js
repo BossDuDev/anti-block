@@ -57,6 +57,13 @@ function replayButton(el, mount) {
       accent: "#fa243c",
     },
     {
+      name: "Deezer",
+      tag: "Sites et applis",
+      description: "Écoute Deezer dans ton navigateur, installe l'app et ajoute-la aux raccourcis de Chrome",
+      url: "deezer.html",
+      logo: "img/deezer.svg",
+    },
+    {
       name: "ChatGPT",
     tag: "Sites et applis",
       description: "Crée un compte ChatGPT avec une adresse Proton Mail, pas à pas",
