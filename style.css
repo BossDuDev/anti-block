@@ -142,10 +142,28 @@ kbd { padding: 1px 7px; border: 1px solid var(--text); border-bottom-width: 2px;
   .capsule__tag { display: none; }
   .ask small { display: none; }
 }
-@keyframes settle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-main, .sheet { animation: settle 0.45s var(--ease) both; }
+@keyframes settle { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes leave { to { opacity: 0; transform: translateY(-14px); } }
+main, .sheet { animation: settle 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.leaving main, .leaving .sheet { animation: leave 0.2s ease-in both; }
+
+/* Les lignes du catalogue arrivent l'une après l'autre */
+.capsule { animation: rise 0.55s var(--ease) both; animation-delay: calc(min(var(--i, 0), 8) * 45ms + 260ms); }
+/* Les étapes et notes apparaissent quand on arrive dessus (classe ajoutée par site.js) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.panel:not([hidden]), .empty:not([hidden]) { animation: rise 0.35s var(--ease) both; }
+/* Appui : un léger enfoncement */
+.button:active, .ask:active, .chip:active, .tab:active, .btn:active, .stage button:active { transform: translateY(1px) scale(0.97); }
+.capsule:active { background: var(--bg); }
+
+/* Bouton pour couper le son (ajouté par site.js sur chaque page) */
+.sound-toggle { position: fixed; right: 14px; bottom: 14px; z-index: 5; padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 2px; background: var(--paper); color: var(--muted); font-family: var(--mono); font-size: var(--fs-label); cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+.sound-toggle:hover { color: var(--text); border-color: var(--text); }
+.sound-toggle[aria-pressed="false"] { text-decoration: line-through; }
 @media (pointer: coarse) { .chip, .tab { min-height: 44px; } .key { display: none; } }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } .reveal { opacity: 1; transform: none; } }
 
 /* ===== games ===== */
 /* Page mini jeux */
