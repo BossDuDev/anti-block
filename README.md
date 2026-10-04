@@ -56,6 +56,7 @@ GitHub Pages fait la différence entre majuscules et minuscules : tous les noms 
 - **Palette** : papier crème, encre brun très foncé, une seule couleur d'accent (la brique, `#ae4326`). Pas de violet ni de bleu, pas de dégradé, pas de halo, pas de motif de fond.
 - **Typographie** : Newsreader (texte et titres) et IBM Plex Mono (numéros et petites étiquettes), chargées depuis Google Fonts par `style.css`. Hors connexion, le site retombe sur Georgia.
 - **Détails** : coins presque carrés, filets fins, animations limitées à de courtes transitions au survol.
+- **Animations et sons** : la page monte du bas à l'arrivée, les étapes apparaissent au défilement, et de très légers bruits de papier (créés par le navigateur, aucun fichier audio) accompagnent les clics. Un bouton « Son » en bas à droite les coupe, et le volume se règle avec `VOLUME` dans `site.js`.
 - **Accessibilité** : focus visible partout, texte assez contrasté, animations coupées si l'appareil le demande.
 
 ## Tester chez soi
