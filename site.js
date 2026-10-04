@@ -154,7 +154,11 @@ function replayButton(el, mount) {
     description.className = "capsule__description";
     description.textContent = capsule.description;
 
-    link.append(brand, description);
+    const tag = document.createElement("span");
+    tag.className = "capsule__tag";
+    tag.textContent = capsule.tag;
+
+    link.append(brand, description, tag);
     return link;
   }
 
@@ -193,6 +197,16 @@ function replayButton(el, mount) {
         filters.appendChild(chip);
       });
     }
+    // Raccourcis : « / » met le curseur dans la recherche, « Échap » l'efface.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== search && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        search.focus();
+      }
+    });
+    search.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { search.value = ""; update(); search.blur(); }
+    });
     search.addEventListener("input", update);
     update();
   }
@@ -493,4 +507,3 @@ function replayButton(el, mount) {
   }
   open(wantedGame || GAMES[0]);
 })();
-
