@@ -28,6 +28,7 @@ Chaque capsule a sa propre page, avec son logo.
 - **Recherche** instantanée, sans tenir compte des accents ni des majuscules. La touche `/` met le curseur dans le champ, `Échap` l'efface.
 - **Catégories** pour filtrer la liste (elles se créent toutes seules à partir des `tag`).
 - **Demander un ajout** : un bouton mène au profil Discord de l'équipe, pour envoyer un message privé.
+- **Compteurs** : l'accueil affiche le nombre de personnes venues sur le site (service gratuit Abacus, une visite comptée une fois par navigateur) et le nombre de capsules. Si le service est injoignable, le compteur de visites se masque.
 - **Animations** : chaque page monte du bas, les étapes apparaissent quand on défile.
 - **Sons** : de très légers bruits de papier créés par le navigateur (aucun fichier audio), avec un bouton pour les couper.
 
@@ -99,3 +100,4 @@ Une idée de capsule ou un tuto manquant ? Envoie un message privé sur [Discord
 - Respecte le règlement de ton établissement : ces guides expliquent comment utiliser des services, à toi de voir ce qui est permis chez toi.
 - Les logos de marques ne sont pas libres de droits : ceux du site sont des dessins faits maison, inspirés des originaux.
 - Les polices viennent de Google Fonts (licence libre SIL OFL).
+- Le compteur de visites appelle un service tiers (abacus.jasoncameron.dev) : il ne stocke qu'un nombre, pas d'identité.
